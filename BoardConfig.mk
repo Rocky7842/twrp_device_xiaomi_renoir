@@ -159,6 +159,8 @@ TW_DEFAULT_BRIGHTNESS := 456 # For a max brightness of 2047
 TW_CUSTOM_CPU_TEMP_PATH := /sys/devices/virtual/thermal/thermal_zone26/temp
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_THEME := portrait_hdpi
+TW_Y_OFFSET := 100
+TW_H_OFFSET := -100
 
 TW_HAS_EDL_MODE := true
 TW_ENABLE_BLKDISCARD := true
