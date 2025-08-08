@@ -23,6 +23,16 @@ on property:twrp.modules.loaded=true
     # Vibrator
     wait /sys/bus/platform/drivers/qcom-hv-haptics
     start vendor.qti.vibrator
+    # Charger
+    wait /sys/class/qcom-battery
+    chmod 0664 /sys/class/qcom-battery/pd_verifed
+    chmod 0664 /sys/class/qcom-battery/request_vdm_cmd
+    chmod 0664 /sys/class/qcom-battery/verify_process
+    chmod 0664 /sys/class/qcom-battery/authentic
+    chmod 0664 /sys/class/qcom-battery/verify_slave_flag
+    chmod 0664 /sys/class/qcom-battery/slave_authentic
+    chmod 0664 /sys/class/qcom-battery/is_old_hw
+    start batterysecret
 
 service remove-bootctrl-vintf /system/bin/remove-bootctrl-vintf.sh
     user root
@@ -35,4 +45,11 @@ service vendor.qti.vibrator /system/bin/hw/vendor.qti.hardware.vibrator.service
     class hal
     user system
     group system input
+    seclabel u:r:recovery:s0
+
+service batterysecret /system/bin/batterysecret
+    class last_start
+    user root
+    group system system wakelock
+    disabled
     seclabel u:r:recovery:s0
