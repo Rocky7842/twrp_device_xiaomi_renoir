@@ -20,10 +20,19 @@ on property:twrp.modules.loaded=true
     write /sys/kernel/boot_adsp/boot 1
     wait /sys/class/power_supply/battery
     start health-hal-2-1
+    # Vibrator
+    wait /sys/bus/platform/drivers/qcom-hv-haptics
+    start vendor.qti.vibrator
 
 service remove-bootctrl-vintf /system/bin/remove-bootctrl-vintf.sh
     user root
     group root
     disabled
     oneshot
+    seclabel u:r:recovery:s0
+
+service vendor.qti.vibrator /system/bin/hw/vendor.qti.hardware.vibrator.service
+    class hal
+    user system
+    group system input
     seclabel u:r:recovery:s0
